@@ -5,7 +5,7 @@ provider "aws" {
 resource "aws_security_group" "default" {
   name        = "bibinSG1"
   description = "security group"
-  replace     = true
+#  replace     = true
 
   ingress {
     from_port   = 22
