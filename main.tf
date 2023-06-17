@@ -5,9 +5,7 @@ provider "aws" {
 resource "aws_security_group" "default" {
   name        = "bibinSG"
   description = "security group"
-  lifecycle {
-    create_before_destroy = true
-  }
+  replace     = true
 
   ingress {
     from_port   = 22
