@@ -23,7 +23,7 @@ jobs:
         run: mvn -f java/pom.xml clean package  # Replace 'path/to/project' with the actual path to your project
 
       - name: Run unit tests
-        run: mvn -f java/pom.xml test  # Replace 'path/to/project' with the actual path to your project
+        run: mvn -f java/pom.xml test  # Replace 'path/to/project' with the actual path to project
 
   deploy:
     needs: build
