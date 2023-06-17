@@ -20,10 +20,10 @@ jobs:
           distribution: 'adopt'  # Use 'adopt' or 'temurin' as the distribution provider
 
       - name: Build with Maven
-        run: mvn -f pom.xml clean package
+        run: mvn -f java/pom.xml clean package  # Replace 'path/to/project' with the actual path to your project
 
       - name: Run unit tests
-        run: mvn -f pom.xml test
+        run: mvn -f java/pom.xml test  # Replace 'path/to/project' with the actual path to your project
 
   deploy:
     needs: build
