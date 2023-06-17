@@ -17,7 +17,7 @@ jobs:
         uses: actions/setup-java@v2
         with:
           java-version: '11'  # Adjust the Java version as needed
-          distribution: 'adopt'  # Use 'adopt' or 'temurin' as the distribution provider
+          distribution: 'adopt'  # Use 'adopt' or 'temurin' as the distribution providers
 
       - name: Build with Maven
         run: mvn -f java/pom.xml clean package  # Replace 'path/to/project' with the actual path to your project
