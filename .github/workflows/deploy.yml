@@ -17,6 +17,7 @@ jobs:
         uses: actions/setup-java@v2
         with:
           java-version: '11'  # Adjust the Java version as needed
+          distribution: 'jdk'  # Specify the Java distribution (e.g., 'jdk', 'adopt', 'temurin')
 
       - name: Build with Maven
         run: mvn clean package  # Adjust the Maven build command as needed
