@@ -3,7 +3,7 @@ provider "aws" {
 }
 
 resource "aws_security_group" "default" {
-  name        = "bibinSG"
+  name        = "bibinSG1"
   description = "security group"
   replace     = true
 
