@@ -20,14 +20,10 @@ jobs:
           distribution: 'adopt'  # Use 'adopt' or 'temurin' as the distribution provider
 
       - name: Build with Maven
-        run: |
-          cd java/pom.xml  # Replace 'path/to/project' with the actual path to your project
-          mvn clean package  # Adjust the Maven build command as needed
+        run: mvn -f java/pom.xml clean package  # Replace 'path/to/project' with the actual path to your project
 
       - name: Run unit tests
-        run: |
-          cd java/pom.xml  # Replace 'path/to/project' with the actual path to your project
-          mvn test  # Adjust the Maven test command as needed
+        run: mvn -f java/pom.xml test  # Replace 'path/to/project' with the actual path to your project
 
   deploy:
     needs: build
@@ -42,7 +38,7 @@ jobs:
 
       - name: Deploy with Terraform
         run: |
-          cd path/to/project  # Replace 'path/to/project' with the actual path to your project
+          cd java  # Replace 'path/to/project' with the actual path to your project
           terraform init
           terraform plan
           terraform apply --auto-approve  # Adjust Terraform commands and options as needed
