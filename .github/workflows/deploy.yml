@@ -38,7 +38,7 @@ jobs:
 
       - name: Deploy with Terraform
         run: |
-          cd ./terraform  # Replace 'path/to/project' with the actual path to your project
+          cd maven/terraform  # Replace 'path/to/project' with the actual path to your project
           terraform init
           terraform plan
           terraform apply --auto-approve  # Adjust Terraform commands and options as needed
