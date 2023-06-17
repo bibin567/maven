@@ -21,12 +21,12 @@ jobs:
 
       - name: Build with Maven
         run: |
-          cd ./java/pom.xml  # Replace 'path/to/project' with the actual path to your project
+          cd java/pom.xml  # Replace 'path/to/project' with the actual path to your project
           mvn clean package  # Adjust the Maven build command as needed
 
       - name: Run unit tests
         run: |
-          cd ./java/pom.xml  # Replace 'path/to/project' with the actual path to your project
+          cd java/pom.xml  # Replace 'path/to/project' with the actual path to your project
           mvn test  # Adjust the Maven test command as needed
 
   deploy:
