@@ -53,7 +53,7 @@ resource "aws_instance" "web" {
   provisioner "remote_exec" {
     inline = ["sudo apt install openjdk-11-jdk", "java -jar target/my-project-1.0-SNAPSHOT.jar"]
   }
-}
+
   tags = {
     Name = var.instance_name
   }
