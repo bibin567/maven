@@ -7,7 +7,7 @@ variable "region" {
 }
 
 variable "ami_id" {
-  default = "ami-053b0d53c279acc90"
+  default = "ami-022e1a32d3f742bd8"
 }
 
 variable "key_pair_name" {
