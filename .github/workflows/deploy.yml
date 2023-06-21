@@ -1,4 +1,4 @@
-name: Java Web Server CI/CD
+name: Build and Deploy
 
 on:
   push:
@@ -13,38 +13,30 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Set up JDK 11
+      - name: Set up JDK
         uses: actions/setup-java@v2
         with:
-          java-version: 11
-          java-package: jdk
-          architecture: x64
-          distribution: temurin
+          java-version: '11'
+
+      - name: Build with Maven
+        run: mvn clean package
+
+      - name: Run unit tests
+        run: mvn test
 
 
-      - name: Build and test
-        run: |
-          mvn clean install -f ./my-project
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
 
-      - name: Deploy to EC2 using Terraform
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Terraform
         uses: hashicorp/setup-terraform@v1
-        with:
-          terraform_version: 1.1.7
-          cli_config_credentials_token: ${{ secrets.AWS_ACCESS_TOKEN }}
-          aws_region: us-east-1
 
-      - name: Configure AWS credentials
-        run: |
-          echo "AWS_ACCESS_KEY_ID=${{ secrets.AWS_ACCESS_KEY_ID }}" >> $GITHUB_ENV
-          echo "AWS_SECRET_ACCESS_KEY=${{ secrets.AWS_SECRET_ACCESS_KEY }}" >> $GITHUB_ENV
+      - name: Deploy with Terraform
+        run: terraform init && terraform apply -auto-approve
 
-      - name: Initialize Terraform
-        run: |
-          terraform init
 
-      - name: Deploy using Terraform
-        run: |
-          echo "${{ secrets.PRIVATE_KEY }}" > private_key
-          chmod 600 private_key
-          terraform init
-          terraform apply -auto-approve -var "private_key_path=./private_key"
