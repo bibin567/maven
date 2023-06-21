@@ -41,6 +41,19 @@ resource "aws_instance" "web" {
   instance_type = var.instance_type
   key_name      = var.key_pair_name
   vpc_security_group_ids = [aws_security_group.default.id]
+  provisioner "remote_exec" {
+    inline = ["sudo apt install openjdk-11-jdk"]
+  }
+
+  provisioner "file" {
+    source = "./my-project"
+    destination = "./my-project"
+  }
+
+  provisioner "remote_exec" {
+    inline = ["sudo apt install openjdk-11-jdk", "java -jar target/my-project-1.0-SNAPSHOT.jar"]
+  }
+}
   tags = {
     Name = var.instance_name
   }
