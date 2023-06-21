@@ -3,7 +3,7 @@ provider "aws" {
 }
 
 resource "aws_security_group" "default" {
-  name        = "bibinSG1"
+  name        = "bibinSG2"
   description = "security group"
 
   ingress {
@@ -43,13 +43,13 @@ resource "aws_key_pair" "bibinjava" {
 resource "aws_instance" "web" {
   ami                    = var.ami_id
   instance_type          = var.instance_type
-  key_name               = aws_key_pair.bibinjava.key_name
+  key_name               = var.key_pair_name
   vpc_security_group_ids = [aws_security_group.default.id]
 
   connection {
     type        = "ssh"
     user        = "ec2-user"
-    private_key = file("~/.ssh/id_rsa")
+    private_key = file("~/.ssh/${var.key_pair_name}")
     host        = self.public_ip
   }
 
@@ -73,3 +73,4 @@ resource "aws_instance" "web" {
     Name = var.instance_name
   }
 }
+
