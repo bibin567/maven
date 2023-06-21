@@ -33,13 +33,6 @@ resource "aws_instance" "web" {
   instance_type          = var.instance_type
   key_name = "bibinaws123"
   vpc_security_group_ids = [aws_security_group.default.id]
-  provisioner "remote-exec" {
-    inline = [
-      "sudo yum update -y",                 # Update instance packages (optional)
-      "sudo yum install -y java-11-amazon-corretto"  # Install Java Runtime (adjust for your desired version)
-      # Additional provisioning steps or commands as needed
-    ]
-  }
 
   tags = {
     Name = var.instance_name
