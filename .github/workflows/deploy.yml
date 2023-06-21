@@ -19,7 +19,7 @@ jobs:
           java-version: 11
           java-package: jdk
           architecture: x64
-          distribution: adoptopenjdk
+          distribution: temurin
 
 
       - name: Build and test
