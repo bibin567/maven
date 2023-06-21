@@ -40,7 +40,6 @@ jobs:
 
       - name: Initialize Terraform
         run: |
-          cd terraform
           terraform init
 
       - name: Deploy using Terraform
