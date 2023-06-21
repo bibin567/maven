@@ -49,7 +49,7 @@ resource "aws_instance" "web" {
   connection {
     type        = "ssh"
     user        = "ec2-user"
-    private_key = file("~/.ssh/id_rsa")
+    private_key = file(var.private_key_path)  # Update to use the variable
     host        = self.public_ip
   }
 
@@ -63,5 +63,10 @@ resource "aws_instance" "web" {
   tags = {
     Name = var.instance_name
   }
+}
+
+variable "private_key_path" {
+  description = "Path to the private key file"
+  type        = string
 }
 

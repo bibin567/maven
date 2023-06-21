@@ -41,6 +41,7 @@ jobs:
       - name: Initialize Terraform
         run: |
           terraform init
+          terraform apply -var "private_key_path=${{ secrets.PRIVATE_KEY_PATH }}"
 
       - name: Deploy using Terraform
         run: |
