@@ -24,7 +24,7 @@ jobs:
 
       - name: Build and test
         run: |
-          mvn clean install
+          mvn clean install -f ./my-project
 
       - name: Deploy to EC2 using Terraform
         uses: hashicorp/setup-terraform@v1
