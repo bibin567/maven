@@ -3,7 +3,7 @@ provider "aws" {
 }
 
 resource "aws_security_group" "default" {
-  name        = "bibinSG1"
+  name        = "bibinSG2"
   description = "security group"
 
   ingress {
@@ -36,7 +36,7 @@ resource "aws_security_group" "default" {
 }
 
 resource "aws_key_pair" "bibinjava" {
-  key_name   = "bibinjava"
+  key_name   = "bibinjava123"
   public_key = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCi0223ntkJS+zps//Ysmvo0HErbK/ZtxRPN77xNsaejmFYIMxMuP8lemzyPY/QGMszp8zkEOl13/DFH+Ju3DnccuAWcEK5u3x4WgK7AnK0aLcACzWC0ED0rtjNywRpSjOuV+KZn1xpZhren7PEMyWe9U0Lnq9couIXEIl8EOArmnGiVaZeqv7XC951KSk9m7NDHPTOPRbC5bg3xO8jacZPZ8ib1nSbivi/lzMgE96RQKq3kVwa94pnc/wx4t51xdxws/hxCvjySKvYmYpkUsbbYVvUCo2EgWSUefhMxt3Pezma8Ax+nRZ5tRkvwHg6Ioz/keHBxC7s90JDQwhkt/KS0w8HYX7vuhdMZ7elW1vuwJhiaeebdDsxKDTTQdZpsysW9JMASj0qDQgMC9f4MXYHb+gHLEE+H9N1DQ4wJPNyUU3lMhdEBhvmrCJyiZJ1Dpm9fuMbCZqg+12El5WNmKzfBkevghEWSgmsrJDMtGA6bRib+UQaVhPazy7kii0X2ss= bibin.joy@AMAGVG497G09Y"
 }
 
