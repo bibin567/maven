@@ -5,7 +5,6 @@ provider "aws" {
 resource "aws_security_group" "default" {
   name        = "bibinSG1"
   description = "security group"
-#  replace     = true
 
   ingress {
     from_port   = 22
@@ -37,26 +36,35 @@ resource "aws_security_group" "default" {
 }
 
 resource "aws_instance" "web" {
-  ami           = var.ami_id
-  instance_type = var.instance_type
-  key_name      = var.key_pair_name
+  ami                    = var.ami_id
+  instance_type          = var.instance_type
+  key_name               = var.key_pair_name
   vpc_security_group_ids = [aws_security_group.default.id]
-  provisioner "remote_exec" {
+
+  connection {
+    type        = "ssh"
+    user        = "ec2-user"
+    private_key = file("${var.key_pair_name}.pem")
+    host        = self.public_ip
+  }
+
+  provisioner "remote-exec" {
     inline = ["sudo apt install openjdk-11-jdk"]
   }
 
   provisioner "file" {
-    source = "./my-project"
+    source      = "./my-project"
     destination = "./my-project"
   }
 
-  provisioner "remote_exec" {
-    inline = ["sudo apt install openjdk-11-jdk", "java -jar target/my-project-1.0-SNAPSHOT.jar"]
+  provisioner "remote-exec" {
+    inline = [
+      "sudo apt install openjdk-11-jdk",
+      "java -jar target/my-project-1.0-SNAPSHOT.jar"
+    ]
   }
 
   tags = {
     Name = var.instance_name
   }
-
 }
-
