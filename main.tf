@@ -31,6 +31,7 @@ resource "aws_security_group" "default" {
 resource "aws_instance" "web" {
   ami                    = var.ami_id
   instance_type          = var.instance_type
+  key_name = "bibinaws123"
   vpc_security_group_ids = [aws_security_group.default.id]
 
 
