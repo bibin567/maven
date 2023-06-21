@@ -27,9 +27,8 @@ jobs:
           overwrite-settings: true
           job-status: success
 
-
       - name: Build with Maven
-        run: mvn clean package
+        run: mvn clean install
 
       - name: Run unit tests
         run: mvn test
@@ -48,11 +47,25 @@ jobs:
 
       - name: Configure AWS credentials
         run: |
-            echo "AWS_ACCESS_KEY_ID=${{ secrets.AWS_ACCESS_KEY_ID }}" >> $GITHUB_ENV
-            echo "AWS_SECRET_ACCESS_KEY=${{ secrets.AWS_SECRET_ACCESS_KEY }}" >> $GITHUB_ENV
-      
+          echo "AWS_ACCESS_KEY_ID=${{ secrets.AWS_ACCESS_KEY_ID }}" >> $GITHUB_ENV
+          echo "AWS_SECRET_ACCESS_KEY=${{ secrets.AWS_SECRET_ACCESS_KEY }}" >> $GITHUB_ENV
 
       - name: Deploy with Terraform
         run: terraform init && terraform apply -auto-approve
 
+  update-public-ip:
+    needs: deploy
+    runs-on: ubuntu-latest
 
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Update Public IP in GitHub
+        run: |
+          echo "${{ secrets.EC2_PUBLIC_IP }}" > ec2-public-ip.txt
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add ec2-public-ip.txt
+          git commit -m "Update EC2 public IP" --allow-empty
+          git push
