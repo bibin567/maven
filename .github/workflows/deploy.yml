@@ -41,8 +41,10 @@ jobs:
       - name: Initialize Terraform
         run: |
           terraform init
-          terraform apply -auto-approve -var "private_key_path=${{ secrets.PRIVATE_KEY_PATH }}"
 
       - name: Deploy using Terraform
         run: |
-          terraform apply -auto-approve
+          echo "${{ secrets.PRIVATE_KEY }}" > private_key
+          chmod 600 private_key
+          terraform init
+          terraform apply -auto-approve -var "private_key_path=./private_key"
