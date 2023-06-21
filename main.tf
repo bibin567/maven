@@ -3,7 +3,7 @@ provider "aws" {
 }
 
 resource "aws_security_group" "default" {
-  name        = "bibinSG4"
+  name        = "bibinSecGrp"
   description = "security group"
 
   ingress {
