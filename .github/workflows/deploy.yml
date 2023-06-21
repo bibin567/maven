@@ -17,6 +17,10 @@ jobs:
         uses: actions/setup-java@v2
         with:
           java-version: 11
+          java-package: jdk
+          architecture: x64
+          distribution: adoptopenjdk
+
 
       - name: Build and test
         run: |
