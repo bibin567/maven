@@ -49,7 +49,7 @@ resource "aws_instance" "web" {
   connection {
     type        = "ssh"
     user        = "ec2-user"
-    private_key = file(var.private_key_path)  # Update to use the variable
+    private_key = file(var.private_key_path)  # Update to use the variables
     host        = self.public_ip
   }
 
